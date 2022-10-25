@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de idade</title>
+    <link rel="stylesheet" href="styleForAll.css" media="screen">
+    <link rel="stylesheet" href="mediaQuery.css" media="screen">
+</head>
+<body>  
+    <header>
+        <h1>Verificador de idade</h1>
+    </header>
+    <main>
+        <section id="conteudo">
+            <label id="dataN" for="iano">Data de nascimento </label>
+            <input type="number" name="ano" id="iano" min="1900"> <br>
+            
+
+            <div id="masculinoEFeminino">
+                <p id="sexo">Sexo </p>
+                <div id="inputs">
+                    <label for="homen">Masculino</label>
+                    <input type="radio" name="sex" id="homen" checked>
+                    <label for="mulher">Feminino</label>
+                    <input type="radio" name="sex" id="mulher"> <br>
+                </div>
+            </div>
+
+            <input id="validar" type="submit" value="Validar" onclick="botao()">
+            <p id="p">Preencha os elemetos acima</p>
+        </section>
+        <section id="imagens">
+            <img id="img" src="#" alt="#">
+        </section>
+            
+
+    </main>
+    <footer>
+        <a href="https://twitter.com/VVitima">@VVitima</a>
+    </footer>
+
+
+    <script>
+        function botao() {
+            var dataNText = document.querySelector('#iano').value
+            var dataN = Number(dataNText)
+            var newData = new Date()
+            var dataDHoje = newData.getFullYear() - dataN
+
+            if (dataDHoje < 0 || dataNText.length == 0){
+                window.alert('Verifique os dados e tente novamente!!!')
+            } else {
+
+                var p = document.querySelector('#p')
+                var sex = document.getElementsByName('sex')
+                var sexo = " "
+                var imagem = document.querySelector('#img')
+
+                    if (sex[0].checked){
+                        sexo = 'Homem'
+                    } else if (sex[1].checked){
+                        sexo = 'Mulher'
+                    }
+                    p.innerText = `${sexo} de ${dataDHoje} anos.`
+
+                        if (sexo == 'Homem') {
+                            imagem.style.display = 'block'
+                            if (dataDHoje < 10){
+                                //Criança
+                                imagem.src = 'imagens/menininhoEdited2.jpg'
+                            } else if (dataDHoje < 40 && dataDHoje > 10){
+                                //adulto
+                                imagem.src = 'imagens/homemEdited2.jpg'
+                            } else if (dataDHoje > 40){
+                                imagem.src = 'imagens/homemVelhoEdited2.jpg'
+                                //velhin
+                            }
+                        } else if (sexo == 'Mulher'){
+                            imagem.style.display = 'block'
+                            if (dataDHoje < 10){
+                                //Criança
+                                imagem.src = 'imagens/meninaEdited2.jpg'
+                            } else if (dataDHoje < 40 && dataDHoje > 10){
+                                imagem.src = 'imagens/mulherEdited2.jpg'
+                                //adulto
+                            } else if (dataDHoje > 40){
+                                imagem.src = 'imagens/mulherVelhaEdited3.jpg'
+                                //velhin
+                            }
+                        }
+                }
+        }
+    </script>
+</body>
+</html>
